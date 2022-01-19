@@ -8,9 +8,9 @@
 ## General Info
 
 This browser based web application to ...
-
-- Hi, my name is Jun. I'm excited about this project because I get to learn git.
-
+* Hi, my name is Jun. I'm excited about this project because I get to learn git.
+* Hi my name a jeff
+	
 ## Technologies
 
 Technologies used for this project:
