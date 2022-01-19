@@ -10,10 +10,10 @@
 This browser based web application to ...
 * Hi, this is Arshnoor Kaur. I am excited about this project because this is my first team project
 * Hi, my name is Jun. I'm excited about this project because I get to learn git.
-* Hi, my name is Blainel, I'm excited about this project Because.
+* Hi, my name is Blaine, I'm excited about this project Because.
 
 
-TEXT ADDED TO CREATE CONFLICT
+TEXT ADDED TO CREATE CONFLICT 2
 
 
 ## Technologies
