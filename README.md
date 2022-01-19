@@ -8,9 +8,9 @@
 ## General Info
 
 This browser based web application to ...
-*Hi, this is Arshnoor Kaur. I am excited about this project because this is my first team project
+* Hi, this is Arshnoor Kaur. I am excited about this project because this is my first team project
 * Hi, my name is Jun. I'm excited about this project because I get to learn git.
-* Hi my name a jeff
+* Hi, my name is Blainel, I'm excited about this project Because.
 	
 ## Technologies
 
