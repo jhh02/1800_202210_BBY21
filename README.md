@@ -1,11 +1,13 @@
 ## My Web Application (Add your Title here)
 
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Contents](#content)
+- [My Web Application (Add your Title here)](#my-web-application-add-your-title-here)
+- [General Info](#general-info)
+- [Technologies](#technologies)
+- [Content](#content)
 
 ## General Info
 This browser based web application to ...
+* Hi, my name is Jun. I'm excited about this project because I get to learn git.
 	
 ## Technologies
 Technologies used for this project:
