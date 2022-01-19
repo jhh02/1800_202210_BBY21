@@ -13,9 +13,9 @@ This browser based web application to ...
 * Hi, my name is Blaine, I'm excited about this project Because.
 
 
-TEXT ADDED TO CREATE CONFLICT 2
+TEXT ADDED TO CREATE CONFLICT 4 ON GITHUB
 
-
+	
 ## Technologies
 
 Technologies used for this project:
