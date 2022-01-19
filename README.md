@@ -6,6 +6,7 @@
 
 ## General Info
 This browser based web application to ...
+*Hi, this is Arshnoor Kaur. I am excited about this project because this is my first team project
 	
 ## Technologies
 Technologies used for this project:
