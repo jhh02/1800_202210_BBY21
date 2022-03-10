@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 	</head>
 	<title>Login Page</title>
 	<style>
@@ -83,7 +85,7 @@ form .txt_field{
 .pass:hover{
 	text-decoration: underline;
 }
-input[type = "submit"]{
+input[type = "button"]{
 	width: 100%;
 	height: 50px;
 	border-bottom: 1px solid;
@@ -95,7 +97,7 @@ input[type = "submit"]{
 	cursor: pointer;
 	outline: none;
 }
-input[type = "submit"]:hover{
+input[type = "button"]:hover{
 	border-color: #2691d9;
 	transition: .5s;
 }
@@ -129,11 +131,12 @@ input[type = "submit"]:hover{
      			<label>Password</label>
      		</div>
      		<div class="pass">Forgot Password? </div>
-     		<input type="submit" value = "Login">
+     		<a href= "profile.html"><input type="button" value="login"></a>
      		<div class = "signup_link">
-     		Not a member? <a href = "#"> Sign Up </a>
+     		Not a member? <a href = "profile.html"> Sign Up </a>
      	</form>
      </div>
+	 <script src="./scripts/firebaseAPI_team21.js"></script>
 </body>
 </html>
 
