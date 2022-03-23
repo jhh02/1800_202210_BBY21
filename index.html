@@ -6,6 +6,16 @@
     <link rel="stylesheet" type="text/css" href="./styles/style.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <script src="./scripts/index.js" defer></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+
+
+
 </head>
 
 <body>
@@ -14,7 +24,7 @@
             <div>You are now discovering</div>
             <div class="setLocation">
                 <div>Downtown</div>
-                <input placeholder="Enter the food you want" id="input">
+                <input id="input" type="text" class="controls">
                 <button class="search">
                     <span class="material-icons-outlined">
                         search
@@ -30,6 +40,7 @@
                         location_on
                     </span>
                 </button>
+                <div><a href="./login.html">Login</a></div>
             </div>
         </div>
         <div class="control">
@@ -49,11 +60,19 @@
         </div>
     </div>
     <div id="map"></div>
-
+    <div id="infowindow-content">
+        <span id="place-name" class="title"></span><br />
+        <span id="place-address"></span>
+        <img id="place-photos"></img>
+    </div>
+    <!-- <div><a href="./profile.html">Profile</a></div> -->
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="./scripts/firebaseConfig.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSQ8gdhK51uacMX8PACFXAycz7ibGjda0&callback=initMap&libraries=localContext,places&v=beta"
-        async></script>
+        async defer>
+        </script>
+
 </body>
 
 </html>

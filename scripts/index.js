@@ -1,115 +1,97 @@
 let map, infoWindow, service, localContextMapView;
 const input = document.querySelector("#input")
 const search = document.querySelector(".search")
-
 const currentLocation = document.querySelector(".currentLocation")
+const vancouverDT = {
+    lat: 49.2827,
+    lng: -123.1207
+}
 
+// map initialization
 function initMap() {
-    const localContextMapView = new google.maps.localContext.LocalContextMapView({
-        element: document.getElementById("map"),
-        placeTypePreferences: [
-            { type: "restaurant", weight: 2 },
-            { type: "bar", weight: 1 },
-        ],
-        maxPlaceCount: 20,
-    });
-    map = localContextMapView.map;
-    map.setOptions({
-        center: {
-            lat: 49.2827,
-            lng: -123.1207
-        },
-        zoom: 16,
-        backgroundColor: "#2b2b2b",
-        mapTypeId: "roadmap",
-        streetViewControl: true,
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_CENTER
-        },
-    });
-    infoWindow = new google.maps.InfoWindow();
-    currentLocation.classList.add("custom-map-control-button");
-    currentLocation.addEventListener("click", () => {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
-                    localContextMapView.directionsOptions = {
-                        origin: {
-                            lat: pos.lat,
-                            lng: pos.lng,
-                        }
-                    }
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent("You are here");
-                    infoWindow.open(map);
-                    map.setCenter(pos);
-                },
-                () => {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                }
-            );
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: vancouverDT,
+        zoom: 7,
+        restriction: {
+            latLngBounds: {
+                north: 49.295067,
+                south: 49.27072,
+                east: -123.100468,
+                west: -123.144320
+            },
+            strictBounds: false
         }
     });
 
-    const options = {
-        types: ["address"],
-        componentRestrictions: {
-            country: "ca",
-        },
-        fields: ["address_components", "geometry", "name"],
-    };
 
-    const autocomplete = new google.maps.places.Autocomplete(input, options);
 
-    autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
+    const searchBox = new google.maps.places.SearchBox(input);
 
-        if (!place || !place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No address available for that input.");
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener("bounds_changed", () => {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    let markers = [];
+
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener("places_changed", () => {
+        const places = searchBox.getPlaces();
+
+        if (places.length == 0) {
             return;
         }
 
-        // Recenter the map to the selected address
-        map.setOptions({
-            center: place.geometry.location,
-            zoom: 14,
+        // Clear out the old markers.
+        markers.forEach((marker) => {
+            marker.setMap(null);
         });
-        // Update the localContext directionsOptions origin
-        localContextMapView.directionsOptions = {
-            origin: place.geometry.location,
-        };
-        new google.maps.Marker({
-            position: place.geometry.location,
-            map: map,
-            icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAbUlEQVR4Ae3LoQ2AMAAF0TMYPJoV2IApGIJtmIMtmIAVqutraj6IiqZpmyYoCO/08R7bXbOOHSF2Ohr0HCh00EPdwImiTgYqRgxKMowUTFiUyTKRMeNQIcdMYsGjSp6FyIoaWkmoUuLxEPzDh1xIaLFFuTyHMgAAAABJRU5ErkJggg==",
-            zIndex: 30,
+        markers = [];
+
+        // For each place, get the icon, name and location.
+        const bounds = new google.maps.LatLngBounds();
+
+        places.forEach((place) => {
+            if (!place.geometry || !place.geometry.location) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+
+            const icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25),
+            };
+
+            // Create a marker for each place.
+            markers.push(
+                new google.maps.Marker({
+                    map,
+                    icon,
+                    title: place.name,
+                    position: place.geometry.location,
+                })
+            );
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
         });
-        // update the results with new places
-        localContextMapView.search();
+        map.fitBounds(bounds);
     });
+
+
+
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(
-        browserHasGeolocation
-            ? "Error: The Geolocation service failed."
-            : "Error: Your browser doesn't support geolocation."
-    );
-    infoWindow.open(map);
-}
 
+// Search box
 
 
 function showSearchbox() {
