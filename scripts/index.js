@@ -1,6 +1,5 @@
 let map, infoWindow, service, localContextMapView;
-const input = document.querySelector("#input")
-const search = document.querySelector(".search")
+const input = document.getElementById("main-search")
 const currentLocation = document.querySelector(".currentLocation")
 const vancouverDT = {
     lat: 49.2827,
@@ -92,11 +91,11 @@ function initMap() {
 // Search box
 
 
-function showSearchbox() {
-    if (input.style.display == "none") {
-        input.style.display = "block";
-    } else {
-        input.style.display = "none"
-    }
-}
-search.addEventListener("click", showSearchbox);
+// function showSearchbox() {
+//     if (input.style.display == "none") {
+//         input.style.display = "block";
+//     } else {
+//         input.style.display = "none"
+//     }
+// }
+// search.addEventListener("click", showSearchbox);
